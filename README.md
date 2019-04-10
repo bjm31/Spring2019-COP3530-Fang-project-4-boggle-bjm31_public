@@ -44,10 +44,12 @@ Players must find as many words as they can in the grid. The rules for the origi
 
 An example of a Boggle board is as follows:
 
+```
 B E N H
 L A U M
 I T L Z
 R G A N
+```
 
 In the above board, there are several examples of words, including 'eat' (going straight down from e), 'bat' (going diagonal from b then straight down), and 'tan' (going up from t then diagonal to n). Proper names such as 'ben' do not count. 
 
