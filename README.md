@@ -34,10 +34,11 @@ To complete this project, you need to make sure that you have read the following
 
 Boggle is a popular word game by Hasbro for any number of players. However, in our version, we will be playing a single person version of the game. Boggle is played with a tray of 16 6-sided, letter dice, which is shaken to get 16 random letters arranged in a 4 x 4 grid. You will be generating this grid for the player. 
 
-Players must find as many words as they can in the grid. The rules for the original game are as follows:
+Players must find as many words as they can in the grid. If you are familiar with the original game, please pay close attention to the following rules, we will be using a variant of the original game:
 
-- The letters must be adjoining in a 'chain' with no wrapping. (Letter cubes in the chain may be adjacent horizontally, vertically, and diagonally.)
+- The letters must be adjoining in a 'chain' with no wrapping. (Letter cubes in the chain may be adjacent horizontally or vertically, but not diagonally.)
 - Words must contain at least three letters.
+- Words can be formed by wrapping around the edge of a board to the other side. 
 - No letter cube may be used more than once within a single word.
 - Words within other words are permissable (e.g., part and art).
 - You will not receive more points for submitting the same word multiple times.
@@ -51,13 +52,7 @@ I T L Z
 R G A N
 ```
 
-In the above board, there are several examples of words, including 'eat' (going straight down from e), 'bat' (going diagonal from b then straight down), and 'tan' (going up from t then diagonal to n). Proper names such as 'ben' do not count. 
-
-You will also implement additional variant game modes on the original game as follows:
-
-1. Try to determine the maximum score that can be achieved without repeating letters from previously selected words.
-2. Allow for the player to wrap around the board horizontally and vertically.
-3. Players get a random letter. This random letter can be inserted anywhere into any string of letters on the board. As an example, they may be be given the letter 't' and identify 'sar' on the board. They can use their extra letter to form the word 'star'. This can be done multiple times but only once per word. 
+In the above board, there are several examples of words, including 'eat', 'grit', and 'nag'. According to the rules of our game, 'zit' would also be an appropriate word as it wraps around the board from 'z'. However, words such as 'bat' and 'tan' which can be formed by going diagonal do not count. Proper names such as 'ben' do not count. 
 
 In order to have interesting games of Boggle, distribution of letters on the dice is important. Therefore, you should make 16 dice with the following sides:
 
