@@ -123,6 +123,7 @@ Congratulations! You achieved 21 out of 21 possible points!
 ```
 
 ### Sample run of program
+![Boggle Demo](BoggleDemo.gif)
 
 ## Data Structures and Algorithms:
 

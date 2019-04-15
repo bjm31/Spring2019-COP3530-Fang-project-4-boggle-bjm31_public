@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 
-OBJECTS = dictionary.o gameboard.o die.o game.o word_find.o
+OBJECTS = dictionary.o gameboard.o die.o word_find.o game.o
 
 main: $(OBJECTS) main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
