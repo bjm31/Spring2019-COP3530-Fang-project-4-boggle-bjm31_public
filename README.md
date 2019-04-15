@@ -63,7 +63,7 @@ In order to have interesting games of Boggle, distribution of letters on the dic
 - Die 5 - L, U, P, E, T, S
 - Die 6 - A, C, I, T, O, A
 - Die 7 - Y, L, G, K, U, E
-- Die 8 - Qu, B, M, J, O, A
+- Die 8 - Q, B, M, J, O, A
 - Die 9 - E, H, I, S, P, N
 - Die 10 - V, E, T, I, G, N
 - Die 11 - B, A, L, I, Y, T
@@ -73,7 +73,7 @@ In order to have interesting games of Boggle, distribution of letters on the dic
 - Die 15 - P, A, C, E, M, D
 - Die 16 - U, T, O, K, N, D
 
-Each die can fall into any of the 16 grid positions. In this version, players are given unlimited time to try to guess all words in the grid. The computer will keep track of all possible words and the maximum score that a player can earn. The player has the option to 'Give Up' once they can no longer identify any words and compare their score to the maximum possible score. Scoring of the game works as follows (based on word length):
+Each die can fall into any of the 16 grid positions. In this version, players are given unlimited time to try to guess all words in the grid. The computer will keep track of all possible words and the maximum score that a player can earn. The player has the option to quit once they can no longer identify any words and compare their score to the maximum possible score. Scoring of the game works as follows (based on word length):
 
 - Fewer than 3 Letters: no score
 - 3 Letters: 1 point
@@ -83,9 +83,44 @@ Each die can fall into any of the 16 grid positions. In this version, players ar
 - 7 Letters: 4 points
 - 8 or More Letters: 11 points
 
-For the die with Qu, this will count as two letters when determining score. 
-
 ## Overview of the Interface:
+
+When the program first loads, it will have randomized a board and found all possible words for the board. It will then show a player the board and prompt for a word: 
+
+```
+I S A A
+L Y S I
+Y A R O
+A R F W
+Enter a word (q to quit):
+```
+
+Note to keep things simple we will make all things case-sensitive (the words file is already in all uppercase). A player will then guess a word. If the word is incorrect, then the game will state that the guess was "Not worth any points": 
+
+```
+Enter a word (q to quit): SORRY
+        Not worth any points
+```
+
+Otherwise, it will simply prompt for another word (and increase the player's score, though this is not necessary to show):
+
+```
+Enter a word: RAYS
+Enter a word: FRAY
+```
+If the player decides to quit, they should be able to see the progress they made in the game and the maximum score they could have received:
+
+```
+Enter a word: q
+You got 9 points and had 0 incorrect guesses.
+There were 21 points possible
+```
+
+If the player has achieved the maximum points possible, then they should be notified that they can quit guessing:
+
+```
+Congratulations! You achieved 21 out of 21 possible points!
+```
 
 ### Sample run of program
 
