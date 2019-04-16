@@ -203,7 +203,7 @@ Your application must function as described below:
 
 1. Your program must adhere to the class diagrams provided in this description.
 2. You program must adhere to using the given interface as specified.
-3. You must implement a backtracking algorithm to find all legal words. Your legal words will be stored in an unordered set. You can use the unordered set data structure from the standard template library in C++ (example, https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/). You should not use any other data structure to store your words.
+3. You must implement a backtracking algorithm to find all legal words. Your legal words will be stored in an unordered set. You can use the unordered set data structure (hash table based) from the standard template library in C++ (example, https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/). You should not use any other data structure to store your words because it is a lot faster than normal std::set (binary tree based) given the huge number of words to be stored. You may noticed the use of the non-standard header `#include <bits/stdc++.h>` in the tutorial page. **DO NOT use it in your code!** Use `#include <unordered_set>` instead.
 
 ## Important Notes:
 
