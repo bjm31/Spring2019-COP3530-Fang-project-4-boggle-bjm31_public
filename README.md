@@ -4,7 +4,7 @@
 
 ## Objective:
 
-This project is meant to help you familiarize yourself with backtracking algorithms and the usage of hashing data structures. You will be recreating the game of 'Boggle', which is a game that involves identifying as many words as possible from a 4 x 4 grid of letter dice. Each dice has 6 letters on it. This game will be single player with the player seeking to identify all words in the grid. 
+This project is meant to help you familiarize yourself with backtracking algorithms and the usage of sets. You will be recreating the game of 'Boggle', which is a game that involves identifying as many words as possible from a 4 x 4 grid of letter dice. Each dice has 6 letters on it. This game will be single player with the player seeking to identify all words in the grid.
 
 ## Learning Outcomes:
 
@@ -32,15 +32,15 @@ To complete this project, you need to make sure that you have read the following
 
 ## Problem Description:
 
-Boggle is a popular word game by Hasbro for any number of players. However, in our version, we will be playing a single person version of the game. Boggle is played with a tray of 16 6-sided, letter dice, which is shaken to get 16 random letters arranged in a 4 x 4 grid. You will be generating this grid for the player. 
+Boggle is a popular word game by Hasbro for any number of players. However, in our version, we will be playing a single person version of the game. Boggle is played with a tray of 16 6-sided, letter dice, which is shaken to get 16 random letters arranged in a 4 x 4 grid. You will be generating this grid for the player.
 
 Players must find as many words as they can in the grid. If you are familiar with the original game, please pay close attention to the following rules, we will be using a variant of the original game:
 
-- The letters must be adjoining in a 'chain' with no wrapping. (Letter cubes in the chain may be adjacent horizontally or vertically, but not diagonally.)
-- Words must contain at least three letters.
-- Words can be formed by wrapping around the edge of a board to the other side. 
+- The letters must be adjoining in a 'chain' with no wrapping. (Letter cubes in the chain may be adjacent **horizontally or vertically, but not diagonally**.)
+- Words must contain **at least three** letters.
+- Words can be formed by **wrapping around the edge** of a board to the other side.
 - No letter cube may be used more than once within a single word.
-- Words within other words are permissable (e.g., part and art).
+- Words within other words are permissible (e.g., part and art).
 - You will not receive more points for submitting the same word multiple times.
 
 An example of a Boggle board is as follows:
@@ -52,7 +52,7 @@ I T L Z
 R G A N
 ```
 
-In the above board, there are several examples of words, including 'eat', 'grit', and 'nag'. According to the rules of our game, 'zit' would also be an appropriate word as it wraps around the board from 'z'. However, words such as 'bat' and 'tan' which can be formed by going diagonal do not count. Proper names such as 'ben' do not count. 
+In the above board, there are several examples of words, including 'eat', 'grit', and 'nag'. According to the rules of our game, 'zit' would also be an appropriate word as it wraps around the board from 'z'. However, words such as 'bat' and 'tan' which can be formed by going diagonal do not count. Proper names such as 'ben' do not count. All possible words are provided as stored in a text file named words.txt in the project directory. The format is one word per line and all words are capitalized.
 
 In order to have interesting games of Boggle, distribution of letters on the dice is important. Therefore, you should make 16 dice with the following sides:
 
@@ -85,7 +85,7 @@ Each die can fall into any of the 16 grid positions. In this version, players ar
 
 ## Overview of the Interface:
 
-When the program first loads, it will have randomized a board and found all possible words for the board. It will then show a player the board and prompt for a word: 
+When the program first loads, it will have randomized a board and found all possible words for the board. It will then show a player the board and prompt for a word:
 
 ```
 I S A A
@@ -95,11 +95,11 @@ A R F W
 Enter a word (q to quit):
 ```
 
-Note to keep things simple we will make all things case-sensitive (the words file is already in all uppercase). A player will then guess a word. If the word is incorrect, then the game will state that the guess was "Not worth any points": 
+Pay attention to the case. You should **convert the user input to all uppercase** to compare. A player will then guess a word. If the word is incorrect, then the game will state that the guess was "Not worth any points":
 
 ```
 Enter a word (q to quit): SORRY
-        Not worth any points
+Not worth any points
 ```
 
 Otherwise, it will simply prompt for another word (and increase the player's score, though this is not necessary to show):
@@ -127,80 +127,83 @@ Congratulations! You achieved 21 out of 21 possible points!
 
 ## Data Structures and Algorithms:
 
-In the case of your program, words should be kept in an unordered set from the C++ STL. You can find more details on this in the additional requirements. 
+In the case of your program, words should be kept in an **unordered set** from the C++ STL. You can find more details on this in the additional requirements.
 
 ## Code Organization:
 You will need to make sure that your code meets the following specifications.
-Note that there is some room for interpretation, but a general code outline is given below.
- 
-### The Main File
-The main file shall handle setting up the initial game and prompting for guesses. 
+Note that there is some room for interpretation, but a general code outline is given below. Pay attention to the file names as suggested in the Makefile and test files.
 
-### The Die Class
+### The Main File
+The main file shall handle setting up the initial game and prompting for guesses.
+
+### The Die Class (die.hpp die.cpp)
 ![UML of Die class](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuKhEIImkLd39J5Mevj9DpaWiKYZ8BoxEJCf9zKajAKajAeusY-NI1ifh59UaM5aLbnHbvgMZgz7aqWPh3ShFoT7GvAhbSaZDIm6Q3W00)
 
-This class is responsible for handling a die (singular of dice) in the game. You need to pass it a string of 6 possible characters. Each character represents one possible side of the die. The roll method will randomly select one of the six characters and return the result.
- 
-### The GameBoard Class
+This class is responsible for handling a die (singular of dice) in the game. You need to pass it a string of 6 possible characters. Each character represents one possible side of the die.
+
+* `char Roll()`
+	* randomly select one of the six characters and return the result
+
+### The GameBoard Class (gameboard.hpp gameboard.cpp)
 ![UML of GameBoard class](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuKhEIImkLd1Fp4rroayiIb6evj9DpaWiKiX9BIb9BIgEDea58Yvjk0ADuf8KAwlYagBCl7IO8aqkRR0UzzGI7x28KsLGVhbpVev6Pbw9Gb5-kOu2Y96SdmDKYQm_E2E_76Ag9bSjbqDgNWhGIG00)
 
-This class is responsible for holding a game board of dice for Boggle. A Boggle board is a 4 x 4 grid of dice. In this case, you will only need to store the resulting characters from rolling the 16 dice. The constructor takes in a string composed of the 16 characters to be placed in the grid. This class should have the following additional methods:  
+This class is responsible for holding a game board of dice for Boggle. A Boggle board is a 4 x 4 grid of dice. In this case, you will only need to store the resulting characters from rolling the 16 dice. The constructor takes in a string composed of the 16 characters to be placed in the grid. This class should have the following additional methods:
 
-* `GetLetterByRowCol (int row, int col)`
+* `GetLetterByRowCol(int row, int col)`
 	* Returns the character at the specified row and column.
-* `ShowBoard ()`
-	* Returns a string representation of the board (should include new lines as needed). 
- 
-### The Dictionary Class
+* `ShowBoard()`
+	* Returns a string representation of the board (should include new lines as needed).
+
+### The Dictionary Class (dictionary.hpp dictionary.cpp)
 ![UML of Dictionary class](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuKhEIImkLd39J2x9pCzBBAfKgERIBIv9iR8gpSilIaajIas9BqujiG4B5PSKPUQbsocam5LpQIDqQcXoQIVbv-SeU1Q70xLg86bHA0SAQ7BLSZcavgK0RGK0)
 
-This class is holds all possible words that could appear in any game. This class will read from words.txt to get all possible words, and then allow the program to check for whether a word exists. Note that we are using a set in this case for quick access (an array would be O(n) which in this case could be substantially longer). The constructor will loads the words, while IsWord will return whether or not a string is a word.   
- 
- ### The WordFind Class
+This class is holds all possible words that could appear in any game. This class will read from words.txt to get all possible words, and then allow the program to check for whether a word exists. Note that we are using a set in this case for quick access (an array would be O(n) which in this case could be substantially longer). The constructor will loads the words, while IsWord will return whether or not a string is a word.
+
+ ### The WordFind Class (word_find.hpp word_find.cpp)
 ![UML of WordFind class](http://www.plantuml.com/plantuml/png/RO-nIiLG38RtynIPv5xi7LmSBYAtjhIhuE0W3iSchGVIfEIaOX7VtQfK19toGvAFxpzbZ-RpoA7Zc3FSgs6J1E4j7EhKULA9jW3-n71uqOHGJXC9ritTvqFUjN6a6us6C1IG7O_7x9PaWEznQzIdrsr3VlNhvFeCUfq5lq05FAaoH3QAk5JFcaaUBYuV2qZYqCrc95uHypwSRwgxDVyBXfQyPFvZk0_luKI2Q-iF)
 
-This class is responsible for finding all possible words that the player could guess from the board and storing them in a set. In addition to the constructor, this class should have the following methods:  
+This class is responsible for finding all possible words that the player could guess from the board and storing them in a set. In addition to the constructor, this class should have the following methods:
 
 * `GetAllWords(GameBoard g)`
-	* Responsible for setting up the arguments to call the recursive backtracking helper function that finds all possible words. Hint: you can call the recursive helper function 16 times, once for each starting location.  
+	* Responsible for setting up the arguments to call the recursive backtracking helper function that finds all possible words. Hint: you can call the recursive helper function 16 times, once for each starting location on the board.
 * `AppendDFSWords(GameBoard g, std::string stringPrefix, std::set<std::string>& foundWords, bool alreadyChosen[16], int currentCell)`
-	* This is the helper function that runs the recursive backtracking algorithm. It takes in a board g, the currently built word stringPrefix, the set of all words currently found on the board, an array denoting whether a character on the board has already been used, and the current position in the grid. Note, that positions are as a single integer which you can convert to a row and column in the grid based on row major form. Keep in mind that this function should find ALL possible words in the board, and not just a single word. 
-        
-### The Game Class
+	* This is the private helper function that runs the recursive backtracking algorithm. It takes in a board g, the currently built word stringPrefix, the set of all words currently found on the board, an array denoting whether a character on the board has already been used, and the current position in the grid. Note, that positions are as a single integer which you can convert to a row and column in the grid based on row major form. Keep in mind that this function should find ALL possible words in the board, and not just a single word. Please be aware that the foundWords is passed by reference. The currentCell variable is an integer and you will need to convert it to the row and column numbers and vice versa as necessary. This function is designed to be recursively called as part of the implement of a backtracking algorithm.
+
+### The Game Class (game.hpp game.cpp)
 ![UML of Game class](http://www.plantuml.com/plantuml/png/VP5FIyGm4CNl-HGvIPUb1oyU5f5L5yk2k8iLzo0UqcQw1gOPo4pjGVpk9gr_AbGl9PtVl9StapMB2TArg6eqpBemBUWtbMySQEjgU3ezUrPvgbwH2LPNwQjo5hjQCSZvU93W_F52rnG2r59qm0oiSkT5-wwj8EoQGo1__2Rp-gP3B45spVLeTA1WO_ChEQkTTxA9WRA5oYSYNO1S8YRoQ33Q9ruHeTvoB3WxN9bD5Nrq_MgwWpvTCiTJ-6YUS1a7WtzwzXGFV4CXXizgyYnwTi2JGNVhM1PgcNOwzHpMVK-87E6qNhvGFom_Ys18_TTCoyyyOzwV_wt__J8Jz41YSCo_9sPNOHA-gpLusxNu0G00)
 
-This class contains the primary logic of the Game. The constructor of this class will handle initializing the board if already rolled dice are not passed in, and will call the WordFind to get all possible words for the board. This class should have the following additional methods:  
+This class contains the primary logic of the Game. The constructor of this class will handle initializing the board if already rolled dice are not passed in, and will call the WordFind to get all possible words for the board. This class should have the following additional methods:
 
 * `initDice()`
-	* Sets up the dice according to the distribution mentioned earlier in the description and places them into an array. Then shuffles the array (you can use the std::random_shuffle function).   
-* `GetAllDiceValues ()`
+	* Sets up the dice according to the distribution mentioned earlier in the description and places them into an array. Then shuffles the array (you can use the std::random_shuffle function).
+* `GetAllDiceValues()`
 	* Rolls each of the 16 dice and returns the results as a string of 16 characters.
-* `IsValidGuess (std::string word)`
-	* Checks whether the guess appears in the set of possible words for the board. 
-* `NewWord (std::string word)`
-	* Checks whether a word has been guessed before. 
-* `GetWordScore (std::string word)`
-	* Returns the number of points a word is worth in the game.   
-* `GetPointsForSet (const std::set<std::string>& wordList)`
-	* Returns the total number of points for a set of words. 
-* `ShowBoard ()`
-	* Returns the string representation of the board. 
-* `Guess (std::string word)`
-	* Checks whether the word is valid, if it is and hasn't been guessed before, should add to correct guesses and return true. If not, then should update number of incorrect guesses and return false.  
-* `GetScore ()`
-	* Returns the total number of points for all words that the player has guessed correctly. 
+* `IsValidGuess(std::string word)`
+	* Checks whether the guess appears in the set of possible words for the board.
+* `NewWord(std::string word)`
+	* Checks whether a word has been guessed before.
+* `GetWordScore(std::string word)`
+	* Returns the number of points a word is worth in the game.
+* `GetPointsForSet(const std::set<std::string>& wordList)`
+	* Returns the total number of points for a set of words.
+* `ShowBoard()`
+	* Returns the string representation of the board.
+* `Guess(std::string word)`
+	* Checks whether the word is valid, if it is and hasn't been guessed before, should add to correct guesses and return true. If not, then should update number of incorrect guesses and return false.
+* `GetScore()`
+	* Returns the total number of points for all words that the player has guessed correctly.
 * `GetIncorrectGuesses()`
 	* Returns the total number of incorrect guesses the player has made.
 * `GetTotalPointsPossible()`
-	* Returns the total number of points that the player could earn for the board. 
-        
+	* Returns the total number of points that the player could earn for the board.
+
 ## Additional Requirements:
 
 Your application must function as described below:
 
 1. Your program must adhere to the class diagrams provided in this description.
 2. You program must adhere to using the given interface as specified.
-3. You must implement a backtracking algorithm to find all legal words. Your legal words will be stored in an unordered set. You can use the unordered set data structure from the standard template library in C++ (example, https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/). You should not use any other data structure to store your words. 
+3. You must implement a backtracking algorithm to find all legal words. Your legal words will be stored in an unordered set. You can use the unordered set data structure from the standard template library in C++ (example, https://www.geeksforgeeks.org/unordered_set-in-cpp-stl/). You should not use any other data structure to store your words.
 
 ## Important Notes:
 
@@ -210,10 +213,10 @@ Your application must function as described below:
 - Please review the academic honesty policy.
   - Note that viewing another student's solution, whether in whole or in part, is considered academic dishonesty.
   - Also note that submitting code obtained through the Internet or other sources, whether in whole or in part, is considered academic dishonesty. \* All programs submitted will be reviewed for evidence of academic dishonesty, and all violations will be handled accordingly.
-  
+
 ## Breakdown of Grades:
 
-You will find a rubric for the project in Canvas. 
+You will find a rubric for the project in Canvas.
 
 ## Submission Instructions:
 
